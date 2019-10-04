@@ -1,0 +1,23 @@
+@Second arithmetic register = val2 + 9 + val3 - val1
+.section .data
+val1: .word 6
+val2: .word 11
+val3: .word 16
+.section .text
+.globl _start
+_start:
+	ldr r1, =val1 @finds address
+	ldr r1, [r1] @loads the value from address
+	ldr r2, =val2
+	ldr r2, [r2]
+	ldr r3, =val3
+	ldr r3, [r3]
+
+	add r2, r2,# 9 @add 9 to r2 and store in r2
+	sub r3, r3, r1 @sub r1 from r3 and store in r3
+	add r1, r2, r3 @add r3 to r2 and store in r1\
+	str r1, [r1]
+
+	mov r7, #1
+	svc #0
+.end
